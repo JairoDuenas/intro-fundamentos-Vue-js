@@ -45,12 +45,17 @@
           label() {
             return this.open ? "Cerrar" : "Abrir";
           },
+          styles() {
+            return this.open ? ["open"] : ["closed"];
+          },
         },
         template: `<form @submit.prevent="submit">
           <button>{{ counter }}</button>
           </form>
-          <div>{{ text }}</div>
-          <button @click="open = !open" >{{ label }}</button>
+          <div class="container" :class="styles">
+            <h2>{{ text }}</h2>
+            <button @click="open = !open" >{{ label }}</button>
+          </div>
           <input
             type="text"
             v-model="text"
@@ -64,5 +69,35 @@
       }).mount("#app");
       console.log(vm);
     </script>
+    <style>
+      html,
+      body {
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      #app,
+      .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 70%;
+        height: 70%;
+      }
+      button {
+        margin-top: 24px;
+        border: none;
+        background-color: white;
+        padding: 8px 24px;
+        border-radius: 12px;
+      }
+      .closed {
+        background-color: #f3323f;
+      }
+      .open {
+        background-color: #b5e7a0;
+      }
+    </style>
   </body>
 </html>
