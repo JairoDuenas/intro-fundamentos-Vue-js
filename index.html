@@ -14,8 +14,9 @@
         data() {
           return {
             counter: 0,
-            text: "Puerta cerrada",
+            text: "Iniciar sesión",
             open: false,
+            username: "",
             firstName: "Jairo",
             lastName: "Dueñas",
             now: new Date(),
@@ -24,9 +25,10 @@
         watch: {
           open(value) {
             if (value) {
-              this.text = "Puerta abierta";
+              this.text = "Cerrar sesión";
             } else {
-              this.text = "Puerta cerrada";
+              this.text = "Iniciar sesión";
+              this.username = "";
             }
           },
         },
@@ -43,7 +45,7 @@
             return this.now.toLocaleDateString();
           },
           label() {
-            return this.open ? "Cerrar" : "Abrir";
+            return this.open ? "Salir" : "Acceder";
           },
           styles() {
             return this.open ? ["open"] : ["closed"];
@@ -54,7 +56,17 @@
           </form>
           <div class="container" :class="styles">
             <h2>{{ text }}</h2>
-            <button @click="open = !open" >{{ label }}</button>
+            <div v-if="open">
+              <p>Hola, {{ username }}</p>
+            </div>
+            <div v-else>
+              <label>Username</label>
+              <input type="text" v-model="username"/>
+            </div>
+            <button @click="open = !open" >
+              <div v-if="!open">Acceder</div>
+              <div v-else>Salir</div>
+            </button>
           </div>
           <input
             type="text"
