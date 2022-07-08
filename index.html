@@ -69,7 +69,19 @@
             return this.open ? ["open"] : ["closed"];
           },
         },
-        template: `<form @submit.prevent="submit">
+        template: `
+        <div>
+          <v-layout>
+            <template v-slot:header>
+              <button>Título</button>
+            </template>
+            <template v-slot:content>
+              Lorem ispum dolor sit amet
+            </template>
+          </v-layout>
+        </div>
+
+        <form @submit.prevent="submit">
           <button>{{ counter }}</button>
           </form>
           <div class="container" :class="styles">
@@ -105,6 +117,18 @@
           `,
         // v-on -> @ , v-bind -> :
       });
+
+      app.component("v-layout", {
+        template: `
+        <header>
+          <slot name="header"></slot>
+        </header>
+        <div>
+          <slot name="content"></slot>
+        </div>
+        `,
+      });
+
       app.component("item", {
         props: ["post"],
         template: `
@@ -135,7 +159,7 @@
       button {
         margin-top: 24px;
         border: none;
-        background-color: white;
+        background-color: #72afed;
         padding: 8px 24px;
         border-radius: 12px;
       }
