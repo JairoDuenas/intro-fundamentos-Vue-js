@@ -13,6 +13,7 @@
       const app = Vue.createApp({
         data() {
           return {
+            saludo: "Hola Vue",
             items: ["uno", "dos", "tres"],
             counter: 0,
             text: "Iniciar sesión",
@@ -74,6 +75,12 @@
           },
         },
         template: `
+
+        <div>
+          <p>{{saludo}}</p>
+          <v-input v-model:value="saludo" />
+        </div>
+
         <ul>
           <v-item
             v-for="(item, i) in items"
@@ -127,6 +134,22 @@
           <div>{{ today }}</div>
 
           `,
+      });
+
+      app.component("v-input", {
+        props: {
+          value: String,
+        },
+        methods: {
+          input(e) {
+            this.$emit("update:value", e.target.value);
+          },
+        },
+        template: `
+        <input type="text"
+          v-bind:value="value"
+          v-on:input="input" />
+        `,
       });
 
       app.component("v-item", {
