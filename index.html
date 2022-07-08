@@ -17,6 +17,24 @@
             text: "Iniciar sesión",
             open: false,
             username: "",
+            posts: [
+              {
+                title: "Título 1",
+                description: "Lorem ipsum...",
+              },
+              {
+                title: "Título 2",
+                description: "Lorem ipsum...",
+              },
+              {
+                title: "Título 3",
+                description: "Lorem ipsum...",
+              },
+              {
+                title: "Título 4",
+                description: "Lorem ipsum...",
+              },
+            ],
             firstName: "Jairo",
             lastName: "Dueñas",
             now: new Date(),
@@ -58,9 +76,16 @@
             <h2>{{ text }}</h2>
             <div v-if="open">
               <p>Hola, {{ username }}</p>
+              <div class="list">
+                <div v-for="(item, i) in posts" :key="i" class="item">
+                  <div class="title">{{item.title}}</div>
+                  <p>{{item.description}}</p>
+                </div>
+              </div>
+              
             </div>
             <div v-else>
-              <label>Username</label>
+              <div>Username</div>
               <input type="text" v-model="username"/>
             </div>
             <button @click="open = !open" >
@@ -94,8 +119,8 @@
         justify-content: center;
         align-items: center;
         flex-direction: column;
-        width: 70%;
-        height: 70%;
+        width: 95%;
+        height: 95%;
       }
       button {
         margin-top: 24px;
@@ -109,6 +134,17 @@
       }
       .open {
         background-color: #b5e7a0;
+      }
+      .list {
+        display: flex;
+        flex-direction: column;
+      }
+      .item {
+        border: 2px solid #0a0b0a;
+      }
+      .title {
+        font-weight: bold;
+        font-size: 1.2rem;
       }
     </style>
   </body>
