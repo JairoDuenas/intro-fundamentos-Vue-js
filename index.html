@@ -14,6 +14,7 @@
         data() {
           return {
             counter: 0,
+            text: "Hola Vue",
           };
         },
         methods: {
@@ -21,10 +22,16 @@
             this.counter++;
           },
         },
-        template: `<form v-on:submit.prevent="submit">
+        template: `<form @submit.prevent="submit">
           <button>{{ counter }}</button>
           </form>
+          <p>{{ text }}</p>
+          <input 
+            type="text" 
+            v-model="text"
+          />
           `,
+        // v-on -> @ , v-bind -> :
       }).mount("#app");
       console.log(vm);
     </script>
