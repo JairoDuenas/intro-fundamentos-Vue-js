@@ -15,6 +15,9 @@
           return {
             counter: 0,
             text: "Hola Vue",
+            firstName: "Jairo",
+            lastName: "Dueñas",
+            now: new Date(),
           };
         },
         methods: {
@@ -22,14 +25,26 @@
             this.counter++;
           },
         },
+        computed: {
+          fullName() {
+            return this.firstName + " " + this.lastName;
+          },
+          today() {
+            return this.now.toLocaleDateString();
+          },
+        },
         template: `<form @submit.prevent="submit">
           <button>{{ counter }}</button>
           </form>
           <p>{{ text }}</p>
-          <input 
-            type="text" 
+          <input
+            type="text"
             v-model="text"
           />
+
+          <div>{{ fullName }}</div>
+          <div>{{ today }}</div>
+
           `,
         // v-on -> @ , v-bind -> :
       }).mount("#app");
