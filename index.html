@@ -14,11 +14,21 @@
         data() {
           return {
             counter: 0,
-            text: "Hola Vue",
+            text: "Puerta cerrada",
+            open: false,
             firstName: "Jairo",
             lastName: "Dueñas",
             now: new Date(),
           };
+        },
+        watch: {
+          open(value) {
+            if (value) {
+              this.text = "Puerta abierta";
+            } else {
+              this.text = "Puerta cerrada";
+            }
+          },
         },
         methods: {
           submit() {
@@ -32,11 +42,15 @@
           today() {
             return this.now.toLocaleDateString();
           },
+          label() {
+            return this.open ? "Cerrar" : "Abrir";
+          },
         },
         template: `<form @submit.prevent="submit">
           <button>{{ counter }}</button>
           </form>
-          <p>{{ text }}</p>
+          <div>{{ text }}</div>
+          <button @click="open = !open" >{{ label }}</button>
           <input
             type="text"
             v-model="text"
